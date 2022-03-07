@@ -8,7 +8,7 @@ void Mesh::GenerateBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	//tell the gpu where to draw each vertex, the size of each vertex, the list of vertices and how to draw it
-	glBufferData(GL_ARRAY_BUFFER, subMesh.vertexList.size() * sizeof(Vertex), &subMesh.vertexList[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, subMesh.getTotalSize() * sizeof(Vertex), &subMesh.vertices[0], GL_STATIC_DRAW);
 
 	//POSITION
 	glEnableVertexAttribArray(0);

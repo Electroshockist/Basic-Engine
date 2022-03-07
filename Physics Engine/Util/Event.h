@@ -10,11 +10,11 @@ public:
 
 	~Event() {}
 
-	void Subscribe(void(*function)(T)) {
+	void Subscribe(void(*function)(T...)) {
 		callbacks.push_back(function);
 	}
 
-	void Unsubscribe(void(*function)(T)) {
+	void Unsubscribe(void(*function)(T...)) {
 		callbacks.erase(std::remove(callbacks.begin(), callbacks.end(), function), callbacks.end());
 	}
 

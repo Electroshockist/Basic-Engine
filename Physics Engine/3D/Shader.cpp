@@ -1,6 +1,8 @@
 #include "Shader.h"
 #include <iostream>
 
+#include <GLM/gtc/type_ptr.hpp>
+
 #define UNIFORMCHECKS(name, useShader)	if(useShader) this->Use(); if(!ItemExists(name)){std::cout << ("The uniform " + std::string(name) + " does not exist in the shader \"" + this->name + "\".", __FILE__, __LINE__);return;}
 
 //concatinate uniform command

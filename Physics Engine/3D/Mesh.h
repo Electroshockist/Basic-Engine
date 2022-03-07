@@ -7,6 +7,7 @@
 
 #include "Shader.h"
 #include "UniformParameter.h"
+#include "Camera/Camera.h"
 
 struct Vertex {
 	glm::vec3 position;
@@ -16,7 +17,15 @@ struct Vertex {
 };
 
 struct SubMesh {
-	std::map<int, std::vector<Vertex>> vertices;
+	std::vector<std::vector<Vertex>> vertices;
+
+	unsigned int getTotalSize() {
+		unsigned int size = 0;
+		for (auto& i : vertices) {
+			size += i.size();
+		}
+		return size;
+	}
 };
 
 class Mesh {
