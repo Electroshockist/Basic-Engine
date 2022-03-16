@@ -21,7 +21,7 @@ class Frustum {
 	void updateMatrix(glm::mat4 projMatrix, glm::mat4 viewMatrix);
 
 	inline void normalizePlane(glm::vec4& plane) {
-		double magnitude = glm::sqrt(
+		float magnitude = glm::sqrt(
 			plane.x * plane.x +
 			plane.y * plane.y +
 			plane.z * plane.z

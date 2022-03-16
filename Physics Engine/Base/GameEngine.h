@@ -23,7 +23,7 @@ struct GameEngine {
 
 	void Exit();
 
-	void SetScene(Scene scene);
+	void SetScene(Scene* scene);
 
 private:
 	GameEngine();
@@ -39,6 +39,5 @@ private:
 
 	Window w;
 
-	Scene scene;
+	Scene* scene;
 };
-

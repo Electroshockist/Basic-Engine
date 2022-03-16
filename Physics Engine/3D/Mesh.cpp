@@ -1,5 +1,7 @@
 #include "Mesh.h"
 
+#include "Shaders/Shader.h"
+
 void Mesh::GenerateBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -8,7 +10,7 @@ void Mesh::GenerateBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	//tell the gpu where to draw each vertex, the size of each vertex, the list of vertices and how to draw it
-	glBufferData(GL_ARRAY_BUFFER, subMesh.getTotalSize() * sizeof(Vertex), &subMesh.vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, subMesh.GetTotalSize() * sizeof(Vertex), &subMesh.vertices[0], GL_STATIC_DRAW);
 
 	//POSITION
 	glEnableVertexAttribArray(0);
@@ -29,4 +31,53 @@ void Mesh::GenerateBuffers() {
 	//stop editing the VBO and VAO
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+Mesh::Mesh(SubMesh submesh, Shader* shaderProgram) : subMesh(subMesh), shaderProgram(shaderProgram), VAO(0), VBO(0){
+	GenerateBuffers();
+}
+
+Mesh::~Mesh() {
+	Destroy();
+}
+
+void Mesh::Render(Camera* camera, std::vector<glm::mat4>& instances_) {
+	shaderProgram->Use();
+	//shaderProgram->BindTexture("material.diffuseMap", GL_TEXTURE_2D, GL_TEXTURE0, subMesh.material.diffuseMap);
+
+	shaderProgram->SetUniformData("view", camera->GetTransformationMatrix());
+	shaderProgram->SetUniformData("proj", camera->GetPerspective());
+
+	////camera
+	//shaderProgram->SetUniformData("cameraPos", camera->GetPosition());
+	//shaderProgram->SetUniformData("light.lightPos", camera->GetLightSources()[0]->GetPosition());
+	//shaderProgram->SetUniformData("light.color", camera->GetLightSources()[0]->GetColour());
+	//shaderProgram->SetUniformData("material.ambient", camera->GetLightSources()[0]->GetAmbientValue());
+	//shaderProgram->SetUniformData("material.diffuse", camera->GetLightSources()[0]->GetDiffuseValue());
+
+	////material
+	//shaderProgram->SetUniformData("material.shininess", subMesh.material.shine);
+	//shaderProgram->SetUniformData("material.transparency", subMesh.material.transparency);
+	//shaderProgram->SetUniformData("material.ambient", subMesh.material.ambient);
+	//shaderProgram->SetUniformData("material.diffuse", subMesh.material.diffuse);
+	//shaderProgram->SetUniformData("material.specular", subMesh.material.specular);
+
+	glBindVertexArray(VAO);
+
+	for(int i = 0; i < instances_.size(); i++) {
+		shaderProgram->SetUniformData("model", instances_[i]);
+	}
+
+	glDrawArrays(GL_TRIANGLES, 0, subMesh.GetTotalSize());
+
+	glBindVertexArray(0);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Mesh::Destroy() {
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+
+	subMesh.vertices.clear();
 }

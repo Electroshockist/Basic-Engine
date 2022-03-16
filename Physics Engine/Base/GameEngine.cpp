@@ -4,7 +4,7 @@
 
 std::unique_ptr<GameEngine> GameEngine::instance = nullptr;
 
-GameEngine::GameEngine() : isRunning(false), fps(120) {}
+GameEngine::GameEngine() : isRunning(false), fps(120), scene(new Scene()) {}
 
 GameEngine::~GameEngine() {
 	Exit();
@@ -47,13 +47,13 @@ bool GameEngine::Update(const float deltaTime) {
 }
 
 bool GameEngine::Render() {
-	return w.Render(scene);
+	return w.Render(*scene);
 }
 
 void GameEngine::Exit() {
 	isRunning = false;
 }
 
-void GameEngine::SetScene(Scene scene) {
+void GameEngine::SetScene(Scene* scene) {
 	this->scene = scene;
 }

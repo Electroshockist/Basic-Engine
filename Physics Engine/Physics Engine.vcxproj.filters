@@ -39,16 +39,19 @@
     <ClCompile Include="3D\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="3D\Shader.cpp">
+    <ClCompile Include="3D\Shaders\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="3D\UniformParameter.cpp">
+    <ClCompile Include="3D\Shaders\UniformParameter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="3D\Geometry\Frustum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="3D\Camera\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3D\Shaders\ShaderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,10 +77,10 @@
     <ClInclude Include="3D\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="3D\Shader.h">
+    <ClInclude Include="3D\Shaders\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="3D\UniformParameter.h">
+    <ClInclude Include="3D\Shaders\UniformParameter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="3D\Geometry\Frustum.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Util\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="3D\Shaders\ShaderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

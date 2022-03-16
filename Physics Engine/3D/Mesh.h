@@ -5,9 +5,14 @@
 #include <GLM/glm.hpp>
 #include <GLEW/glew.h>
 
-#include "Shader.h"
-#include "UniformParameter.h"
+#include "Shaders/Shader.h"
+#include "Shaders/UniformParameter.h"
 #include "Camera/Camera.h"
+
+struct Texture {
+	unsigned int id;
+	std::string type;
+};
 
 struct Vertex {
 	glm::vec3 position;
@@ -19,7 +24,7 @@ struct Vertex {
 struct SubMesh {
 	std::vector<std::vector<Vertex>> vertices;
 
-	unsigned int getTotalSize() {
+	unsigned int GetTotalSize() {
 		unsigned int size = 0;
 		for (auto& i : vertices) {
 			size += i.size();
