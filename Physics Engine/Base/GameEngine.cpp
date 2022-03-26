@@ -23,6 +23,8 @@ bool GameEngine::OnCreate(int argc, char* argv[]) {
 		return false;
 	}
 
+	if(!scene->OnCreate()) return false;
+
 	timer.Start();
 
 	return isRunning = true;

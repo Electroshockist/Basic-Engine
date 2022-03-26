@@ -30,7 +30,7 @@ public:
 
 	void AddModel(Model& model);
 
-	void RemoveModel(Model& const model);
+	void RemoveModel(Model& model);
 
 	void Render();
 };

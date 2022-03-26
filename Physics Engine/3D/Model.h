@@ -8,16 +8,16 @@
 #include <assimp/postprocess.h>
 
 #include "../GameObject.h"
+#include "AssetImporter.h"
 
 class Mesh;
 class Shader;
-class ModelLoader;
 class Camera;
 class Model : public GameObject {
 	std::vector<Mesh*> meshes;
 	Shader* shaderProgram;
 	std::vector<glm::mat4> modelInstances;
-	ModelLoader* modelLoader;
+	AssetImporter* assetImporter;
 
 	void LoadModel();
 

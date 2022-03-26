@@ -21,8 +21,11 @@ struct Vertex {
 	glm::vec3 colour;
 };
 
-struct SubMesh {
+struct VertexList {
 	std::vector<std::vector<Vertex>> vertices;
+};
+
+struct SubMesh : public VertexList {
 
 	unsigned int GetTotalSize() {
 		unsigned int size = 0;

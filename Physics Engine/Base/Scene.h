@@ -1,6 +1,8 @@
 #pragma once
 #include "../3D/Camera/Camera.h"
 #include "../3D/Model.h"
+
+#include "../3D/AssetImporter.h"
 struct Scene {
 	Scene() {}
 	~Scene() {}
@@ -11,5 +13,6 @@ struct Scene {
 private:
 	Camera camera;
 	Model* model;
+	AssetImporter* importer;
 };
 

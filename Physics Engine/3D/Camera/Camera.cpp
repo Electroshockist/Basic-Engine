@@ -35,7 +35,7 @@ void Camera::RemoveModel(Model& model) {
 }
 
 void Camera::Render() {
-	//for(auto& model : models) {
-	//	model->Render(this);
-	//}
+	for(const auto& model : models) {
+		model->Render(this);
+	}
 }
