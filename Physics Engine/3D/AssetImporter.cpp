@@ -6,10 +6,14 @@
 #include <assimp/cimport.h>
 #include <assimp/postprocess.h>
 
-AssetImporter::AssetImporter() {
-	const aiScene* scene = aiImportFile("../skull.obj", aiProcessPreset_TargetRealtime_MaxQuality);
+void AssetImporter::PostProcessing() {}
 
-	std::cout << "Meshes " << scene->mMeshes[0]->mNumVertices << std::endl;
+void AssetImporter::LoadMaterial(const std::string& fileName) {}
+
+void AssetImporter::LoadMaterialLibrary(const std::string& fileName) {}
+
+AssetImporter::AssetImporter() {
+
 }
 
 AssetImporter::~AssetImporter() {
@@ -21,6 +25,25 @@ AssetImporter::~AssetImporter() {
 	textureIndices.clear();
 	meshVertices.clear();
 	meshes.clear();
+}
+
+bool AssetImporter::LoadModel(const std::string& fileName) {
+	bool err = false;
+
+	const aiScene* scene = aiImportFile("../skull.obj", aiProcessPreset_TargetRealtime_MaxQuality);
+
+	std::cout << "Meshes " << scene->mMeshes[0]->mNumVertices << std::endl;
+
+	scene->mNumMeshes;
+
+	delete scene;
+	scene = nullptr;
+
+	return !err;
+}
+
+bool AssetImporter::LoadModel(const std::string& fileName, const std::string& matName) {
+	return false;
 }
 
 std::vector<Vertex> AssetImporter::GetVerts() {

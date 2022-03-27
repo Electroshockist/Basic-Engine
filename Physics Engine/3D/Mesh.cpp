@@ -68,7 +68,7 @@ void Mesh::Render(Camera* camera, std::vector<glm::mat4>& instances_) {
 		shaderProgram->SetUniformData("model", instances_[i]);
 	}
 
-	glDrawArrays(GL_TRIANGLES, 0, subMesh.GetTotalSize());
+	glDrawArrays(GL_TRIANGLES, 0, subMesh.vertices.size());
 
 	glBindVertexArray(0);
 
