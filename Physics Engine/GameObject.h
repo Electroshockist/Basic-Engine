@@ -5,13 +5,19 @@
 
 #include "Util/Event.h"
 
+class Scene;
 class GameObject {
 	glm::vec3 position;
 	glm::mat4 translation, rotation;
 	glm::vec3 angles;
 
+	Scene* scene;
+
+protected:
+	GameObject() : position(glm::vec3()), angles(glm::vec3()), translation(GetTranslationMatrix()), rotation(GetRotationMatrix()) {}
+
 public:
-	GameObject();
+	GameObject(Scene* const scene) : GameObject() {};
 	virtual ~GameObject();
 
 	Event<glm::vec3> onSetPosition, onSetRotation;

@@ -3,12 +3,10 @@
 #include <vector>
 
 #include <GLM/glm.hpp>
-#include <assimp/Importer.hpp>
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 #include "../GameObject.h"
-#include "AssetImporter.h"
+#include "../Util/Event.h"
 
 class Mesh;
 class Shader;
@@ -17,13 +15,20 @@ class Model : public GameObject {
 	std::vector<Mesh*> meshes;
 	Shader* shaderProgram;
 	std::vector<glm::mat4> modelInstances;
-	AssetImporter* assetImporter;
 
-	void LoadModel();
+	std::vector < Camera*> associatedCameras;
+
+		void LoadModel();
+	void LoadTextures(aiTexture** textures, unsigned int size);
+
+	Model();
+	Model(const std::string& objPath, const std::string& matPath, Shader* shaderProgram);
+
+	~Model();
 
 public:
-	Model(const std::string& objPath, const std::string& matPath, Shader* shaderProgram);
-	~Model();
+	friend Camera;
+
 	void AddMesh(Mesh* mesh);
 	void OnDestroy();
 	int CreateInstance(glm::vec3 position, float angle, glm::vec3 rotation, glm::vec3 scale);
@@ -32,4 +37,3 @@ public:
 
 	void Render(Camera* camera);
 };
-

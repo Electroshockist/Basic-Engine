@@ -46,6 +46,10 @@ bool AssetImporter::LoadModel(const std::string& fileName, const std::string& ma
 	return false;
 }
 
+int AssetImporter::LoadTexture(const std::string& fileName) {
+	return 0;
+}
+
 std::vector<Vertex> AssetImporter::GetVerts() {
 	return meshVertices;
 }

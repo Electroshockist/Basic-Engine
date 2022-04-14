@@ -10,7 +10,8 @@
 #include <map>
 
 
-struct Shader {
+class Shader {
+public:
 	friend class ShaderManager;
 
 	// Constructor

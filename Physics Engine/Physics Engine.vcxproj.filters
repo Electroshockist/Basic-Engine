@@ -101,5 +101,8 @@
     <ClInclude Include="3D\AssetImporter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Util\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

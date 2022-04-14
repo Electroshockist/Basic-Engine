@@ -4,9 +4,13 @@
 
 #include "Glm/gtx/string_cast.hpp"
 
-Window::Window() : title(""), x(0), y(0), width(0), height(0), window(nullptr), context(nullptr), clearflags(0), flags(0), clearColour(0) {}
+Window* Window::activeWindow = nullptr;
 
-bool Window::OnCreate(string title, int x, int y, int width, int height, glm::vec4 clearColour, GLuint flags, GLuint clearFlags) {
+Window::Window() : title(""), x(0), y(0), width(0), height(0), window(nullptr), context(nullptr), clearflags(0), flags(0), clearColour(0) {
+	activeWindow = this;
+}
+
+bool Window::OnCreate(string title, int x, int y, int width, int height, glm::vec4 clearColour, GLbitfield flags, GLbitfield clearFlags) {
 	this->title = title;
 	this->x = x;
 	this->y = y;
@@ -15,6 +19,8 @@ bool Window::OnCreate(string title, int x, int y, int width, int height, glm::ve
 	this->clearColour = clearColour;
 	this->clearflags = clearFlags;
 	this->flags = flags;
+
+	activeWindow = this;
 
 	if(!InitSDL()) return false;
 
@@ -28,8 +34,6 @@ bool Window::OnCreate(string title, int x, int y, int width, int height, glm::ve
 
 	return true;
 }
-
-
 
 void Window::SetTitle(const string t) {
 	title = t;
@@ -51,7 +55,7 @@ const int& Window::GetY() const {
 	return y;
 }
 
-glm::vec2 Window::getDimensions() const {
+glm::vec2 Window::GetDimensions() const {
 	return glm::vec2(GetWidth(), GetHeight());
 }
 
@@ -71,8 +75,12 @@ const bool Window::Render(const Scene scene) const {
 	return returnVal;
 }
 
-SDL_Window* Window::GetWindow() const {
+SDL_Window* const Window::GetWindow() const {
 	return window;
+}
+
+Window* const Window::GetActiveWindow() {
+	return activeWindow;
 }
 
 bool Window::InitSDL() {

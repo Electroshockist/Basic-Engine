@@ -2,7 +2,7 @@
 
 #include "Shaders/Shader.h"
 
-void Mesh::GenerateBuffers() {
+void Mesh::GenerateBuffers(GLenum usage) {
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 
@@ -10,7 +10,7 @@ void Mesh::GenerateBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	//tell the gpu where to draw each vertex, the size of each vertex, the list of vertices and how to draw it
-	glBufferData(GL_ARRAY_BUFFER, subMesh.GetTotalSize() * sizeof(Vertex), &subMesh.vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, subMesh.vertices.size() * sizeof(Vertex), &subMesh.vertices[0], usage);
 
 	//POSITION
 	glEnableVertexAttribArray(0);
@@ -33,8 +33,8 @@ void Mesh::GenerateBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-Mesh::Mesh(SubMesh submesh, Shader* shaderProgram) : subMesh(subMesh), shaderProgram(shaderProgram), VAO(0), VBO(0){
-	GenerateBuffers();
+Mesh::Mesh(SubMesh submesh, Shader* shaderProgram, GLenum shaderUsage) : subMesh(subMesh), shaderProgram(shaderProgram), VAO(0), VBO(0){
+	GenerateBuffers(shaderUsage);
 }
 
 Mesh::~Mesh() {

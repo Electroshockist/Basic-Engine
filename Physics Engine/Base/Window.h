@@ -1,4 +1,6 @@
-#pragma once
+#ifndef WINDOW_H
+#define WINDOW_H
+
 #include <string>
 
 #include "SDL/SDL.h"
@@ -35,7 +37,7 @@ struct Window {
 	///Size can only be set initially, therefore there are no setters for size
 
 	//get window size
-	glm::vec2 getDimensions() const;
+	glm::vec2 GetDimensions() const;
 
 	//get window hight
 	const int& GetWidth() const;
@@ -44,9 +46,11 @@ struct Window {
 
 	const bool Render(const Scene scene) const;
 
-	SDL_Window* GetWindow() const;
+	SDL_Window* const GetWindow() const;
 
 	~Window() {};
+
+	static Window* const GetActiveWindow();
 
 private:
 	string title;
@@ -60,5 +64,8 @@ private:
 	void SetAttributes(int major, int minor);
 
 	void GetInstalledOpenGLInfo(int* major, int* minor);
+
+	static Window* activeWindow;
 };
 
+#endif // !WINDOW_H

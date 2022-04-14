@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include "../../GameObject.h"
 
 #include <memory>
@@ -17,9 +19,17 @@ class Camera : public GameObject {
 
 	std::vector<Model*> models;
 
-public:
+	static std::vector<std::unique_ptr<Camera>> cameras;
+
 	Camera();
+
+	Camera(glm::vec3 position, float fieldOfView, float nearPlane, float farPlane);
+	
 	~Camera();
+
+public:
+	friend std::default_delete<Camera>;
+	static Camera* LoadCamera(glm::vec3 position, float fieldOfView, float nearPlane, float farPlane);
 
 	const glm::mat4 GetPerspective();
 	const glm::mat4 GetOrthographic();
@@ -28,10 +38,13 @@ public:
 
 	Frustum GetFrustum() const;
 
-	void AddModel(Model& model);
+	void AddModel(Model* model);
 
-	void RemoveModel(Model& model);
+	void RemoveModel(Model* model);
 
 	void Render();
+
+	static const std::vector<std::unique_ptr<Camera>> GetCameras();
 };
 
+#endif // !CAMERA_H

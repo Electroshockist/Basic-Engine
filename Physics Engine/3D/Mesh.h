@@ -27,14 +27,14 @@ struct SubMesh {
 };
 
 class Mesh {
-	void GenerateBuffers();
+	void GenerateBuffers(GLenum usage);
 	GLuint VAO, VBO;
 	Shader* shaderProgram;
 	SubMesh subMesh;
 public:
 	std::vector<UniformParameter> uniforms;
 
-	Mesh(SubMesh submesh, Shader* shaderProgram);
+	Mesh(SubMesh submesh, Shader* shaderProgram, GLenum shaderUsage = GL_STATIC_DRAW);
 	~Mesh();
 
 	void Render(Camera* camera, std::vector<glm::mat4>& instances_);

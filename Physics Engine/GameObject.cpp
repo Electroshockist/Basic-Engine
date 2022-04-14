@@ -3,8 +3,6 @@
 #include <GLM/gtx/euler_angles.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
 
-GameObject::GameObject() : position(glm::vec3(0)), angles(glm::vec3(0.0f, -90.0f, 0.0f)), translation(glm::mat4(0)), rotation(glm::mat4()) {}
-
 GameObject::~GameObject() {
 }
 
